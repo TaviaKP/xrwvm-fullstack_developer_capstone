@@ -7,8 +7,23 @@
 <script>
 
 const logout = async (e) => {
-//Include the code for logout here.
+  e.preventDefault();  // <-- stop the <a href="/"> from navigating immediately
+
+  try {
+    let logout_url = window.location.origin + "/djangoapp/logout/";
+    const res = await fetch(logout_url, { method: "GET" });
+    const json = await res.json();
+
+    let username = sessionStorage.getItem('username');
+    sessionStorage.removeItem('username');
+    alert("Logging out " + username + "...");
+    window.location.href = window.location.origin;
+  } catch (err) {
+    console.error("Logout failed:", err);
+    alert("Error during logout: " + err.message);
+  }
 };
+
 
 let checkSession = ()=>{
   let curr_user = sessionStorage.getItem("username");
@@ -16,7 +31,7 @@ let checkSession = ()=>{
   if (curr_user && curr_user !== "") {
     document.getElementById("loginlogout").innerHTML = 
     '<span class="homepage_links">' + curr_user +'</span>' +
-    '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
+    '<a class="homepage_links" onclick="logout(event)" href="/">Logout</a>'
   } else {
     document.getElementById("loginlogout").innerHTML = 
     '<a class="homepage_links" href="/login">Login</a>'+
