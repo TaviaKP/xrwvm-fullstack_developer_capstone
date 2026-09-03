@@ -14,6 +14,9 @@ urlpatterns = [
     path('login/', TemplateView.as_view(template_name="index.html")),
     path('logout/', views.logout_request, name='logout'),
     
+ # path for list of cars
+    path(route='get_cars', view=views.get_cars, name ='getcars'),
+
     # path for dealer reviews view
 
     # path for add a review view
