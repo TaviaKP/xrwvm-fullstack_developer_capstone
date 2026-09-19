@@ -1,4 +1,4 @@
-from django.urls import path,re_path
+from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
@@ -13,9 +13,9 @@ urlpatterns = [
     path(route='login', view=views.login_user, name='login'),
     path('login/', TemplateView.as_view(template_name="index.html")),
     path('logout/', views.logout_request, name='logout'),
-    
- # path for list of cars
-    path(route='get_cars', view=views.get_cars, name ='getcars'),
+
+    # path for list of cars
+    path(route='get_cars', view=views.get_cars, name='getcars'),
 
     # path for dealer reviews view
 
